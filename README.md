@@ -6,8 +6,9 @@ you can create and build a weex porject by the plugin
 
 ### Install
 
-Open your Atom and search `weexpack` to isntall.
+Open your Atom and search `weexpack` to install.
 
+<img src="http://img1.vued.vanthink.cn/vued9812de45a53502a8a2d7af95f9a96d4d.png" />
 
 
 
