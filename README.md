@@ -2,4 +2,6 @@
 
 an atom plugin for weexpack
 
-you can create and build a weex porject by this plugin
+you can create and build a weex porject by the plugin
+
+### how to use 
