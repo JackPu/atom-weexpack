@@ -1,11 +1,11 @@
 {
-  "name": "atom-weexpack",
-  "main": "./lib/atom-weexpack",
+  "name": "weexpack",
+  "main": "./lib/main",
   "version": "0.0.1",
   "description": "A short description of your package",
   "keywords": [],
   "activationCommands": {
-    "atom-workspace": "atom-weexpack:create"
+    "atom-workspace": "weexpack:create"
   },
   "repository": "https://github.com/atom/atom-weexpack",
   "license": "MIT",
