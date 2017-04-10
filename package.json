@@ -12,6 +12,9 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
+  "scripts": {
+    "build": "webpack"
+  },
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -19,11 +22,18 @@
     "weexpack-create": "^0.1.4"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
-    "flow-bin": "^0.43.1"
+    "flow-bin": "^0.43.1",
+    "style-loader": "^0.16.1",
+    "webpack": "^2.3.3",
+    "webpack-dashboard": "^0.3.0",
+    "webpack-node-externals": "^1.5.4"
   }
 }

@@ -2,20 +2,18 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-const Prpos = {
+const Props = {
 
 };
 
 
-export default class Input extend React.Component {
-  props: {
-
+class Input extends React.Component {
+  constuctor(props) {
+    super(props);
+    this.state = {
+      value: '',
+    };
   }
-
-  state: {
-    value: '',
-  }
-
   redner() {
     return (
       <atom-text-editor
@@ -29,3 +27,8 @@ export default class Input extend React.Component {
   }
 
 }
+
+Input.defaultProps = {
+
+};
+export default Input;
