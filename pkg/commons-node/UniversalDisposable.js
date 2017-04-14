@@ -1,3 +1,4 @@
+'use babel';
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
  * All rights reserved.
@@ -5,7 +6,7 @@
  * This source code is licensed under the license found in the LICENSE file in
  * the root directory of this source tree.
  *
- * @noflow
+ * @flow
  */
 
 
@@ -24,6 +25,7 @@ export default class UniversalDisposable {
   }
 
   add(...teardowns) {
+    console.log(teardowns);
     if (this.disposed) {
       throw new Error('Cannot add to an already disposed UniversalDisposable!');
     }
@@ -51,7 +53,7 @@ export default class UniversalDisposable {
           teardown();
         }
       });
-      this.teardowns = (null: any);
+      this.teardowns = null;
     }
   }
 

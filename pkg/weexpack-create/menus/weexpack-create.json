@@ -6,7 +6,7 @@
         {
           "label": "create",
           "command": "weexpack-create: create"
-        },
+        }
       ]
     }
   ]

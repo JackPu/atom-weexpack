@@ -2,24 +2,30 @@
 // weexpakc cerate a project
 import React from 'react';
 import ReactDom from 'react-dom';
-import createPackage from '../../commons-atom';
+import createPackage from '../../commons-atom/create-package';
 import UniversalDisposable from '../../commons-node/UniversalDisposable';
 import FileDialog from '../components/file-dialog';
 
-const weexpackCreate = require('weexpack-create');
-let atomPanel = null;
 
-class Activation() {
+let atomPanel = null;
+console.log(FileDialog);
+class Activation {
   constructor(rawState) {
-    this._disposable = new UniversalDisposable();
-    this._disposable.add(atom.commands.add('atom-workspace', {
-      'weexpack: cerate': this.create(),
+    this._didActivateDisposable = atom.packages.onDidActivateInitialPackages(() => {
+      this._didActivateDisposable.dispose();
+    });
+    const self = this;
+    this._disposable = new UniversalDisposable(this._didActivateDisposable);
+    this._disposable.add(
+      atom.commands.add('atom-workspace', {
+        'weexpack: cerate': self.create(),
     }));
 
   }
 
   create() {
-
+    console.log(1);
+    // this._openDialog();
   }
 
   _openDialog(props) {
@@ -30,7 +36,7 @@ class Activation() {
   _closeDialog() {
     if (atomPanel != null) {
       if (dialogComponent != null) {
-        ReactDOM.unmountComponentAtNode(atomPanel.getItem());
+        ReactDom.unmountComponentAtNode(atomPanel.getItem());
         dialogComponent = null;
       }
 
@@ -39,5 +45,6 @@ class Activation() {
     }
 
   }
-
 }
+console.log(123);
+createPackage(module.exports, Activation);

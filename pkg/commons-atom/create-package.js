@@ -33,7 +33,6 @@ import invariant from 'assert';
  */
 export default function createPackage(moduleExports, Activation) {
   let activation = null;
-
   // Proxy method calls on the package to the activation object.
   for (const property of getPropertyList(Activation.prototype)) {
     if (typeof Activation.prototype[property] !== 'function') {
@@ -59,7 +58,7 @@ export default function createPackage(moduleExports, Activation) {
       return activation[property](...args);
     };
   }
-
+  console.log(1);
   /**
    * Calling `initialize()` creates a new instance.
    */

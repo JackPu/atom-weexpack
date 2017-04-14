@@ -1,3 +1,4 @@
+'use babel';
 // input component
 import React from 'react';
 import ReactDom from 'react-dom';
@@ -8,7 +9,7 @@ const Props = {
 
 
 class Input extends React.Component {
-  constuctor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       value: '',
