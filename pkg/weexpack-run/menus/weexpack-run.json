@@ -1,0 +1,22 @@
+{
+  "menu": [
+    {
+      "label": "Weexpack",
+      "submenu": [
+        {
+          "label": "run",
+          "submenu": [
+              {
+                "label": "iOS",
+                "command": "weexpack-platform: runIOS"
+              },
+              {
+                "label": "Android",
+                "command": "weexpack-platform: runAndroid"
+              }
+          ]
+        }
+      ]
+    }
+  ]
+}

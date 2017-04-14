@@ -1,0 +1,19 @@
+{
+  "menu": [
+    {
+      "label": "Weexpack",
+      "submenu": [{
+        "label": "Platform add",
+        "submenu": [
+          {
+            "label": "add ios",
+            "command": "weexpack-platgorm: addIOS"
+          },
+          {
+            "label": "add android",
+            "command": "weexpack-platgorm: addAndroid"
+          }
+        ]
+    }
+  ]
+}

@@ -6,9 +6,7 @@ import createPackage from '../../commons-atom/create-package';
 import UniversalDisposable from '../../commons-node/UniversalDisposable';
 import FileDialog from '../components/file-dialog';
 
-
 let atomPanel = null;
-console.log(FileDialog);
 class Activation {
   constructor(rawState) {
     this._didActivateDisposable = atom.packages.onDidActivateInitialPackages(() => {
@@ -18,7 +16,7 @@ class Activation {
     this._disposable = new UniversalDisposable(this._didActivateDisposable);
     this._disposable.add(
       atom.commands.add('atom-workspace', {
-        'weexpack: cerate': self.create(),
+        'weexpack: cerate': self.create,
     }));
 
   }
@@ -46,5 +44,5 @@ class Activation {
 
   }
 }
-console.log(123);
+
 createPackage(module.exports, Activation);
