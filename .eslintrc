@@ -7,6 +7,6 @@
     ],
 
     globals: {
-        'atom': true
+        atom: false
     }
 }
