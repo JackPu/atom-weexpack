@@ -1,3 +1,4 @@
+'use babel';
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
  * All rights reserved.
@@ -5,19 +6,18 @@
  * This source code is licensed under the license found in the LICENSE file in
  * the root directory of this source tree.
  *
- * @flow
+ * @noflow
  */
 
 import invariant from 'assert';
-import {parse} from 'shell-quote';
 
-export function stringifyError(error: Error): string {
+export function stringifyError(error) {
   return `name: ${error.name}, message: ${error.message}, stack: ${error.stack}.`;
 }
 
 // As of Flow v0.28, Flow does not alllow implicit string coercion of null or undefined. Use this to
 // make it explicit.
-export function maybeToString(str: ?string): string {
+export function maybeToString(str) {
   // We don't want to encourage the use of this function directly because it coerces anything to a
   // string. We get stricter typechecking by using maybeToString, so it should generally be
   // preferred.
@@ -68,11 +68,7 @@ const longFormats = [
   [Number.MAX_VALUE, 'years ago', YEAR],
 ];
 
-export function relativeDate(
-  input_: number | Date,
-  reference_?: number | Date,
-  useShortVariant?: boolean = false,
-): string {
+export function relativeDate(input_, reference_, useShortVariant) {
   let input = input_;
   let reference = reference_;
   if (input instanceof Date) {
@@ -104,7 +100,7 @@ export function relativeDate(
  * Count the number of occurrences of `char` in `str`.
  * `char` must be a string of length 1.
  */
-export function countOccurrences(haystack: string, char: string) {
+export function countOccurrences(haystack, char) {
   invariant(char.length === 1, 'char must be a string of length 1');
 
   let count = 0;
@@ -117,21 +113,8 @@ export function countOccurrences(haystack: string, char: string) {
   return count;
 }
 
-/**
- * shell-quote's parse allows pipe operators.
- * Generally users don't care about this, so throw if we encounter any operators.
- */
-export function shellParse(str: string, env?: Object): Array<string> {
-  const result = parse(str, env);
-  for (let i = 0; i < result.length; i++) {
-    if (typeof result[i] !== 'string') {
-      throw new Error(`Unexpected operator "${result[i].op}" provided to shellParse`);
-    }
-  }
-  return result;
-}
 
-export function removeCommonPrefix(a: string, b: string): [string, string] {
+export function removeCommonPrefix(a, b) {
   let i = 0;
   while (a[i] === b[i] && i < a.length && i < b.length) {
     i++;
@@ -139,7 +122,7 @@ export function removeCommonPrefix(a: string, b: string): [string, string] {
   return [a.substring(i), b.substring(i)];
 }
 
-export function removeCommonSuffix(a: string, b: string): [string, string] {
+export function removeCommonSuffix(a, b) {
   let i = 0;
   while (a[a.length - 1 - i] === b[b.length - 1 - i] && i < a.length && i < b.length) {
     i++;
@@ -147,14 +130,14 @@ export function removeCommonSuffix(a: string, b: string): [string, string] {
   return [a.substring(0, a.length - i), b.substring(0, b.length - i)];
 }
 
-export function shorten(str: string, maxLength: number, suffix?: string): string {
+export function shorten(str, maxLength, suffix) {
   return str.length < maxLength ? str : str.slice(0, maxLength) + (suffix || '');
 }
 
 /**
  * Like String.split, but only splits once.
  */
-export function splitOnce(str: string, separator: string): [string, ?string] {
+export function splitOnce(str, separator) {
   const index = str.indexOf(separator);
   return index === -1
     ? [str, null]
@@ -164,10 +147,10 @@ export function splitOnce(str: string, separator: string): [string, ?string] {
 /**
  * Indents each line by the specified number of characters.
  */
-export function indent(str: string, level: number = 2, char: string = ' '): string {
+ export function indent(str, level, char) {
   return str.replace(/^([^\n])/gm, char.repeat(level) + '$1');
 }
 
-export function pluralize(noun: string, count: number) {
+export function pluralize(noun, count) {
   return count === 1 ? noun : noun + 's';
 }

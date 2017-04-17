@@ -25,7 +25,6 @@ export default class UniversalDisposable {
   }
 
   add(...teardowns) {
-    console.log(teardowns);
     if (this.disposed) {
       throw new Error('Cannot add to an already disposed UniversalDisposable!');
     }

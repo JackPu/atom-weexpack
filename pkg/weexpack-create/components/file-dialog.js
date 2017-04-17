@@ -6,7 +6,7 @@
 
 import React from 'react';
 import ReactDom from 'react-dom';
-
+import UniversalDisposable from '../../commons-node/UniversalDisposable';
 import AtomInput from '../../weexpack-ui/input';
 
 export default class FileDialog extends React.Component {
@@ -15,22 +15,42 @@ export default class FileDialog extends React.Component {
     this.state = {
       val: 123,
     };
+    this._disposable = new UniversalDisposable();
+    this._confirm = this._confirm.bind(this);
+    this._close = this._close.bind(this);
+    this._handleDocumentMouseDown = this._handleDocumentMouseDown.bind(this);
+  }
+
+  componentDidMount() {
+    const input = this.refs.input;
+    this._disposable.add(ReactDOM.findDOMNode(input), {
+      'core:confirm': this._confirm,
+      'core:close': this._close
+    })
+    document.addEventListener('mousedown', this._handleDocumentMouseDown)
   }
 
   render() {
     return (
       <div className="tree-view-dialog" ref="dialog">
-       <label>{this.props.message}</label>
-       <AtomInput
+        <label>{this.props.message}</label>
+        <AtomInput
          initialValue={this.props.initialValue}
          ref="input"
-       />
-     </div>
+        />
+      </div>
     );
   }
 
+  _handleDocumentMouseDown(event) {
+    const dialog = this.refs.dialog;
+    if (event.target !== dialog && !dialog.contains(event.target)) {
+      this._close();
+    }
+  }
+
   _confirm() {
-    this.props.onConfirm(this.refs.input.getText(), this.state.options);
+    this.props.onConfirm(this.refs.input.getVal(), this.state.options);
     this._close();
   }
 

@@ -1,7 +1,9 @@
 'use babel';
 // input component
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
+import { maybeToString } from '../commons-node/string';
+import classNames from 'classnames';
 
 const Props = {
 
@@ -15,7 +17,12 @@ class Input extends React.Component {
       value: '',
     };
   }
-  redner() {
+
+  render() {
+    const className = classNames(this.props.className, {
+      'atom-text-editor-unstyled': this.props.unstyled,
+      [`atom-text-editor-${maybeToString(this.props.size)}`]: (this.props.size != null),
+    });
     return (
       <atom-text-editor
         class={className}
@@ -25,6 +32,22 @@ class Input extends React.Component {
         onBlur={this.props.onBlur}
       />
     );
+  }
+
+  setVal(val) {
+    this.getTextEditor().setText(val);
+  }
+
+  getVal() {
+    return this.state.val;
+  }
+
+  getTextEditor() {
+    return this.getInputElement().getModel();
+  }
+
+  getInputElement() {
+    return ReactDOM.findDOMNode(this);
   }
 
 }
