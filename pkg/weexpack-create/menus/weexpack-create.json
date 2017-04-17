@@ -4,8 +4,17 @@
       "label": "Weexpack",
       "submenu": [
         {
-          "label": "create",
-          "command": "weexpack-create: create"
+          "label": "Create",
+          "submenu": [
+            {
+                "label": "Vue Project",
+                "command": "weexpack-create: createVue"
+            },
+            {
+                "label": "Weex Project",
+                "command": "weexpack-create: createWe"
+            }
+          ]
         }
       ]
     }

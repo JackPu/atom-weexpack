@@ -23,7 +23,7 @@ class Activation {
 
   create() {
     console.log(1);
-    // this._openDialog();
+    this._openDialog();
   }
 
   _openDialog(props) {

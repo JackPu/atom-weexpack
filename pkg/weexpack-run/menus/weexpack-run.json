@@ -8,11 +8,11 @@
           "submenu": [
               {
                 "label": "iOS",
-                "command": "weexpack-platform: runIOS"
+                "command": "weexpack-run: runIOS"
               },
               {
                 "label": "Android",
-                "command": "weexpack-platform: runAndroid"
+                "command": "weexpack-run: runAndroid"
               }
           ]
         }
