@@ -5,7 +5,7 @@
 
 
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 import UniversalDisposable from '../../commons-node/UniversalDisposable';
 import AtomInput from '../../weexpack-ui/input';
 
@@ -23,10 +23,13 @@ export default class FileDialog extends React.Component {
 
   componentDidMount() {
     const input = this.refs.input;
-    this._disposable.add(ReactDOM.findDOMNode(input), {
-      'core:confirm': this._confirm,
-      'core:close': this._close
-    })
+    this._disposable.add(atom.commands.add(
+      ReactDOM.findDOMNode(input),
+      {
+        'core:confirm': this._confirm,
+        'core:close': this._close
+      }
+    ));
     document.addEventListener('mousedown', this._handleDocumentMouseDown)
   }
 

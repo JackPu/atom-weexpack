@@ -33,7 +33,13 @@ class Activation {
 
   create(fileType) {
     this._openDialog({
-      message: 'Enter the path:'
+      message: 'Enter the path:',
+      onConfirm: (path) => {
+        console.log(path);
+      },
+      onClose: () => {
+        this._closeDialog();
+      }
     });
   }
 
@@ -41,7 +47,6 @@ class Activation {
     this._closeDialog();
     const dialogEle = document.createElement('div');
     atomPanel = atom.workspace.addModalPanel({item: dialogEle});
-    console.log(FileDialog);
     dialogComponent = ReactDOM.render(
       <FileDialog {...props} />,
       dialogEle,
@@ -51,14 +56,12 @@ class Activation {
   _closeDialog() {
     if (atomPanel != null) {
       if (dialogComponent != null) {
-        ReactDom.unmountComponentAtNode(atomPanel.getItem());
+        ReactDOM.unmountComponentAtNode(atomPanel.getItem());
         dialogComponent = null;
       }
-
       atomPanel.destroy();
       atomPanel = null;
     }
-
   }
 }
 

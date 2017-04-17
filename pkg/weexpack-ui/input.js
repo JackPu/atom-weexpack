@@ -39,7 +39,7 @@ class Input extends React.Component {
   }
 
   getVal() {
-    return this.state.val;
+    return this.state.value;
   }
 
   getTextEditor() {

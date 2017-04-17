@@ -58,7 +58,6 @@ export default function createPackage(moduleExports, Activation) {
       return activation[property](...args);
     };
   }
-  console.log(1);
   /**
    * Calling `initialize()` creates a new instance.
    */
