@@ -1,25 +1,23 @@
+'use babel';
 
-var atomPanel;
+import fs from 'fs';
+import path from 'path';
 
-module.exports = {
-  openModal(props) {
-    this._closeDialog();
-    const dialogHostElement = document.createElement('div');
-    atomPanel = atom.workspace.addModalPanel({ item: dialogHostElement });
-    dialogComponent = _reactDom.default.render(_react.default.createElement((_FileDialogComponent || _load_FileDialogComponent()).default, props), dialogHostElement);
+export default {
+  // check the folder could initialise weex project
+  checkProj(dir) {
+    if (fs.existsSync(path)) {
+      if (fs.existsSync(path.join(dir, 'src'))) {
+        atom.notifications.addError(`Your directory "src" cannot be replaced`);
+        return false;
+      }
+      if (fs.existsSync(path.join(dir, 'package.json'))) {
+        atom.notifications.addError(`Your directory cannot be initialized`);
+        return false;
+      }
+    }
+    return true;
   },
 
-  _clsoeModal() {
-    if (atomPanel != null) {
-      if (dialogComponent != null) {
-        _reactDom.default.unmountComponentAtNode(atomPanel.getItem());
-        dialogComponent = null;
-      }
 
-      atomPanel.destroy();
-      atomPanel = null;
-    }
-  }
-
-
-}
+};

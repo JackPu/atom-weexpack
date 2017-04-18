@@ -1,3 +1,4 @@
+'use babel';
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
  * All rights reserved.
@@ -13,25 +14,6 @@
 //
 // This package creates, queries and decomposes NuclideUris.
 
-export type NuclideUri = string;
-
-type ParsedUrl = {
-  hostname: ?string,
-  path: string,
-};
-
-type ParsedRemoteUrl = {
-  hostname: string,
-  path: string,
-};
-
-type ParsedPath = {
-  root: string,
-  dir: string,
-  base: string,
-  ext: string,
-  name: string,
-};
 
 import invariant from 'assert';
 // eslint-disable-next-line nuclide-internal/prefer-nuclide-uri

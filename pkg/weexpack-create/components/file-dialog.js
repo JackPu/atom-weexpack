@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 import UniversalDisposable from '../../commons-node/UniversalDisposable';
 import AtomInput from '../../weexpack-ui/input';
 
-export default class FileDialog extends React.Component {
+class FileDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,27 +26,26 @@ export default class FileDialog extends React.Component {
     this._disposable.add(atom.commands.add(
       ReactDOM.findDOMNode(input),
       {
-        'core:confirm': this._confirm,
-        'core:close': this._close
+        'core:confirm': () => {
+          this._confirm();
+        },
+        'core:close': () => {
+          this._close();
+        },
       }
     ));
     document.addEventListener('mousedown', this._handleDocumentMouseDown)
   }
 
-  render() {
-    return (
-      <div className="tree-view-dialog" ref="dialog">
-        <label>{this.props.message}</label>
-        <AtomInput
-         initialValue={this.props.initialValue}
-         ref="input"
-        />
-      </div>
-    );
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this._handleDocumentMouseDown);
   }
 
   _handleDocumentMouseDown(event) {
     const dialog = this.refs.dialog;
+    if (!dialog) {
+      this._close();
+    }
     if (event.target !== dialog && !dialog.contains(event.target)) {
       this._close();
     }
@@ -64,5 +63,33 @@ export default class FileDialog extends React.Component {
     }
   }
 
+  render() {
+    return (
+      <div className="tree-view-dialog" ref="dialog">
+        <label>{this.props.message}</label>
+        <AtomInput
+         initialValue={this.props.initialValue}
+         ref="input"
+        />
+      </div>
+    );
+  }
+
 
 }
+
+
+
+FileDialog.defaultProps = {
+  onConfirm: function() {},
+  onClose: function() {},
+  message: 'Create a Weex Project in the path:',
+};
+
+FileDialog.propType = {
+  onConfirm: React.PropTypes.function,
+  onClose: React.PropTypes.function,
+  message: React.PropTypes.string,
+};
+
+export default FileDialog;

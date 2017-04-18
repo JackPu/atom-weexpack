@@ -6,7 +6,14 @@
         "import"
     ],
     "rules": {
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["atom"]}]
+        "no-underscore-dangle": ["error", {
+            "allowAfterSuper": true,
+            "allowAfterThis": true
+        }],
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["atom", "weexpack-create"]}]
+    },
+    "env" : {
+        "browser": true
     },
     "globals" : {
         "atom": 0

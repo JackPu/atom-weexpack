@@ -2,9 +2,12 @@
 // weexpakc cerate a project
 import React from 'react';
 import ReactDOM from 'react-dom';
+import weexpackCreate from 'weexpack-create';
 import createPackage from '../../commons-atom/create-package';
 import UniversalDisposable from '../../commons-node/UniversalDisposable';
 import FileDialog from '../components/file-dialog';
+import util from './util';
+
 
 let atomPanel = null;
 let dialogComponent = null;
@@ -32,10 +35,15 @@ class Activation {
   }
 
   create(fileType) {
+    let projectPath = atom.project.getPaths();
+    if(projectPath.length > 0) {
+      projectPath = projectPath[0]
+    }
     this._openDialog({
       message: 'Enter the path:',
+      initialValue: projectPath,
       onConfirm: (path) => {
-        console.log(path);
+        this._confrim(path);
       },
       onClose: () => {
         this._closeDialog();
@@ -51,6 +59,13 @@ class Activation {
       <FileDialog {...props} />,
       dialogEle,
     );
+  }
+
+  _confrim(path) {
+    if (!util.checkProj(path)) {
+      weexpackCreate(path);
+    }
+
   }
 
   _closeDialog() {
