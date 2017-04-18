@@ -16,14 +16,13 @@ class Activation {
     this._didActivateDisposable = atom.packages.onDidActivateInitialPackages(() => {
       this._didActivateDisposable.dispose();
     });
-    const self = this;
     this._disposable = new UniversalDisposable(this._didActivateDisposable);
     this._disposable.add(
       atom.commands.add('atom-workspace', {
         'weexpack-create: createVue': () => this.createVue(),
-        'weexpack-create: createWeex': () => this.createWeex()
-    }));
-
+        'weexpack-create: createWeex': () => this.createWeex(),
+      }),
+    );
   }
 
   createVue() {
@@ -34,10 +33,10 @@ class Activation {
     this.create('weex');
   }
 
-  create(fileType) {
+  create() {
     let projectPath = atom.project.getPaths();
-    if(projectPath.length > 0) {
-      projectPath = projectPath[0]
+    if (projectPath.length > 0) {
+      projectPath = projectPath[0];
     }
     this._openDialog({
       message: 'Enter the path:',
@@ -47,7 +46,7 @@ class Activation {
       },
       onClose: () => {
         this._closeDialog();
-      }
+      },
     });
   }
 
@@ -62,10 +61,9 @@ class Activation {
   }
 
   _confrim(path) {
-    if (!util.checkProj(path)) {
+    if (util.checkProj(path)) {
       weexpackCreate(path);
     }
-
   }
 
   _closeDialog() {
