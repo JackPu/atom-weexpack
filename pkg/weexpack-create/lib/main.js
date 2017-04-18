@@ -33,7 +33,7 @@ class Activation {
     this.create('weex');
   }
 
-  create() {
+  create(fileType) {
     let projectPath = atom.project.getPaths();
     if (projectPath.length > 0) {
       projectPath = projectPath[0];
@@ -42,7 +42,7 @@ class Activation {
       message: 'Enter the path:',
       initialValue: projectPath,
       onConfirm: (path) => {
-        this._confrim(path);
+        this._confrim(path, fileType);
       },
       onClose: () => {
         this._closeDialog();
